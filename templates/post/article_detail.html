@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .date-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+    
+    .date-container div {
+            background-color: black;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+</style>
+{% include 'partials/_yangilikheader.html' %}
+
+<div class="col">
+    <div class="card-header">
+      <div class="card shadow-sm">
+                <div class="card-header">
+                    <div class="date-container">
+                        <div>Yaratildi: 📅 {{ object.date }}</div>
+                        <div>Yangilandi: 📅 {{ object.date }}</div>
+                        <div>O'qildi: 👁️ {{ object.views }}</div>
+                    </div>
+                    {% if object.photo %}
+                        <img src="{{ object.photo.url }}" alt="{{ object.title }}" style="max-height: 600px; object-fit: cover;" class="card-img-top">
+                    {% endif %}
+                    <h1 class="card-title">{{ object.title }}</h1>
+                    
+                    <p class="card-text">{{ object.body | safe }}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Muallif: {{ object.author }} | {{ object.date }}</h6>
+                    <div class="d-flex justify-content-start">
+                        <a class="btn btn-primary mr-2" href="{% url 'article_edit' object.pk %}">Tahrirlash</a>
+                        <a class="btn btn-danger mr-2" href="{% url 'article_delete' object.pk %}">O'chirish</a>
+                        <a class="btn btn-secondary" href="{% url 'yangiliklar' %}">Barcha postlar</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+{% include 'partials/_yangiliklower.html' %}
+{% endblock content %}

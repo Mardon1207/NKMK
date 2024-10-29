@@ -1,0 +1,6 @@
+django
+crispy-bootstrap4
+djangorestframework
+django-allauth
+pillow
+django-filter

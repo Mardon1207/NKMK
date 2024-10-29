@@ -1,0 +1,158 @@
+<!-- <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+  <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+    aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
+        aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{% url 'home' %}">
+            <svg class="bi">
+              <use xlink:href="#house-fill" />
+            </svg>
+            Asosiy
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="{% url 'telefon' %}">
+            <svg class="bi">
+              <use xlink:href="#file-earmark" />
+            </svg>
+            Telefon raqamlar
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <svg class="bi">
+              <use xlink:href="#people" />
+            </svg>
+            Ishchilar
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <svg class="bi">
+              <use xlink:href="#graph-up" />
+            </svg>
+            Kampusga kelganlar
+          </a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <svg class="bi">
+              <use xlink:href="#puzzle" />
+            </svg>
+            Yangiliklar
+          </a>
+        </li>
+      </ul>
+
+      <hr class="my-3">
+
+      <ul class="nav flex-column mb-auto">
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <svg class="bi">
+              <use xlink:href="#gear-wide-connected" />
+            </svg>
+            Sozlamalar
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <form method="post" action="{% url 'logout' %}" class="d-flex align-items-center gap-2 m-0 p-0" style="text-align: center;">
+            {% csrf_token %}
+            <button type="submit"
+              class="btn btn-link p-0 m-0 text-decoration-none d-flex align-items-center gap-2 nav-link"
+              style="text-align: center;">
+              <svg class="bi">
+                <use xlink:href="#puzzle" />
+              </svg>
+              Chiqish
+            </button>
+          </form>
+        </li>
+
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="{% url 'login' %}">
+            <svg class="bi">
+              <use xlink:href="#puzzle" />
+            </svg>
+            Kirish
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div> -->
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<header class="p-3" data-bs-theme="dark" style="background-color: blanchedalmond;">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="https://actual.ngmk.uz/assets/public/images/logo.png" alt="" title="NKMK AJ"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'telefonadmin' %}">Telefon raqamlar</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'telefon' %}">Telefon raqamlar</a>
+          </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'application' %}">Arizalarni kurish</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'application_new' %}">Ariza yuborish</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'yangiliklar' %}">Yangiliklar</a>
+          </li>
+    
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_new' %}">Post qo`shish</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url '404' %}">Sozlanmalar</a>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="btn btn-outline-success" type="submit">Chiqish</button>
+        </form>
+
+        {% else %}
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <button class="btn btn-outline-success" type="submit">Kirish</button>
+        </form>
+
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>

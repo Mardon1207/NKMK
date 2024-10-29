@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% include 'partials/_yangilikheader.html' %}
+<div class="col">
+    <div class="card-header">
+      <div class="card shadow-sm">
+                <div class="card-header">
+                <h1 class="text-center" style="margin: 0;">Tahrirlash</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form|crispy }}
+                        <button class="btn btn-info btn-block mt-3" type="submit">Saqlash</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% include 'partials/_yangiliklower.html' %}
+{% endblock content %}
